@@ -1,0 +1,72 @@
+Campus Resource Reservation System - Complexity Analysis
+=======================================================
+
+Let:
+R = number of resources
+N = number of active reservations
+W = number of waiting-list requests
+C = number of cancelled reservations
+
+1. Resource Linear Search
+   Operation: Search resource by ID
+   Time: O(R)
+   Space: O(1)
+   Reason: Resources are scanned from the vector until the ID is found.
+
+2. Active Reservation Linked List
+   Add reservation at end: O(N)
+   Search by reservation ID: O(N)
+   Remove by reservation ID: O(N)
+   Display all: O(N)
+   Space: O(N)
+
+3. Waiting List Queue
+   Enqueue: O(1)
+   Dequeue next request for a specific resource: O(W)
+   Display all: O(W)
+   Count waiting requests for a resource: O(W)
+   Space: O(W)
+
+   The queue preserves FIFO order. When searching for a specific resource,
+   the first matching request is selected, so FIFO order is preserved among
+   requests for that resource.
+
+4. Cancellation History Stack
+   Push cancellation: O(1)
+   Peek most recent cancellation: O(1)
+   Pop / undo: O(1)
+   Display all: O(C)
+   Space: O(C)
+
+5. Quick Sort
+   Used for resource name and popularity sorting.
+   Average time: O(R log R)
+   Worst-case time: O(R^2)
+   Recursive auxiliary space: O(log R) average, O(R) worst case
+
+6. Create Reservation
+   Resource search: O(R)
+   Duplicate active reservation check: O(N)
+   Duplicate waiting reservation check: O(W)
+   Duplicate cancellation-history check: O(C)
+   Active-list append when available: O(N)
+   Overall worst-case: O(R + N + W + C)
+
+7. Cancel Reservation
+   Remove active reservation: O(N)
+   Search resource: O(R)
+   Push cancellation: O(1)
+   Search waiting queue for next request: O(W)
+   Overall: O(N + R + W)
+
+8. Undo Cancellation
+   Stack peek/pop: O(1)
+   Resource search: O(R)
+   Active duplicate check and append: O(N)
+   Overall: O(R + N)
+
+9. Reporting
+   Resource statistics: O(R)
+   Waiting counts are computed per resource: O(R * W)
+   Most-requested resource scan: O(R)
+   Overall: O(R * W) in the current implementation.
